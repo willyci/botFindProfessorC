@@ -131,8 +131,8 @@ namespace Microsoft.Bot.Sample.LuisBot
                 Console.WriteLine(employee);
             }
 */
-             XDocument xdocument = XDocument.Load("data.xml");
-             IEnumerable<XElement> persons = xdocument.Elements();
+             //XDocument xdocument = XDocument.Load("data.xml");
+             //IEnumerable<XElement> persons = xdocument.Elements();
         }
         
         [LuisIntent("faq")]
