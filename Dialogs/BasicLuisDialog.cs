@@ -71,7 +71,9 @@ namespace Microsoft.Bot.Sample.LuisBot
             await context.PostAsync("Searching ... ");
             await this.ShowLuisResult(context, result);
             
-
+            List<Object> list1 = new List<Object>(); // name
+            List<Object> list2 = new List<Object>(); // rank
+            List<Object> list3 = new List<Object>(); // department
             
             string message = "LUIS return";
             EntityRecommendation rank;
