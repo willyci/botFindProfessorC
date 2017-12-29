@@ -129,8 +129,8 @@ namespace Microsoft.Bot.Sample.LuisBot
                     String str = (String)e;
                     if(str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
                         list1.Add(e);
-                        message += str + "\n";
-                        //message += (String)e.Element("displayname") + " - ";
+                        //message += str + "\n";
+                        message += (String)e.Element("displayname") + " - ";
                     }
                 }
             }            
