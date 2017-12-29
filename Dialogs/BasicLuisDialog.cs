@@ -73,12 +73,12 @@ namespace Microsoft.Bot.Sample.LuisBot
             
 
             
-            string message = "you said ";
+            string message = "LUIS return";
             EntityRecommendation rank;
 
             if (result.TryFindEntity(EntityFacultyRank, out rank))
             {
-                 message += ": Faculty title : " + rank.Entity;
+                 message += ":   Faculty rank = " + rank.Entity;
             }
 
 
@@ -86,53 +86,32 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             if (result.TryFindEntity(EntityNameOne, out name1))
             {
-                message += "; name1 : " + name1.Entity;
+                message += ";   name = " + name1.Entity;
             }
             
             EntityRecommendation name2;
 
             if (result.TryFindEntity(EntityNameTwo, out name2))
             {
-                message += "; name2 : " + name2.Entity;
+                message += ";   name2 = " + name2.Entity;
             }
             
             EntityRecommendation name3;
 
             if (result.TryFindEntity(EntityNameThree, out name3))
             {
-                message += "; name3 : " + name3.Entity;
+                message += ";   name3 = " + name3.Entity;
             }
             
             EntityRecommendation department;
 
             if (result.TryFindEntity(EntityDepartment, out department))
             {
-                message += "; department : " + department.Entity;
+                message += ";   department = " + department.Entity;
             }
 
             await context.PostAsync(message); 
             
-
-            var findString = "Radiology";
-/*
-            XElement root = XElement.Load("data.xml");
-  
-            IEnumerable<XElement> address =
-                from el in root.Elements("person")
-                where (string)el.Element("departmentname") == findString
-                select el;
-            foreach (XElement el in address)
-                Console.WriteLine(el);
-                
-            XDocument xdocument = XDocument.Load("..\\..\\Employees.xml");
-            IEnumerable<XElement> employees = xdocument.Elements();
-            foreach (var employee in employees)
-            {
-                Console.WriteLine(employee);
-            }
-*/
-             //XDocument xdocument = XDocument.Load("data.xml");
-             //IEnumerable<XElement> persons = xdocument.Elements();
         }
         
         [LuisIntent("faq")]
