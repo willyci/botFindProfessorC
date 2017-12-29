@@ -127,8 +127,8 @@ namespace Microsoft.Bot.Sample.LuisBot
                     String str = (String)e;
                     if(str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
                         list1.Add(e);
-                        //message += str + "\n";
-                        message += (String)e.Element("displayname") + " - ";
+                        message += str + "\n";
+                        //message += (String)e.Element("displayname") + " - ";
                     }
                 }
             }            
@@ -147,7 +147,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
             }            
-            //await context.PostAsync("total by name and rank = " + list2.Count + " , " + message );    
+            await context.PostAsync("total by name and rank = " + list2.Count + " , " + message );    
             message = "";
             
             
@@ -162,7 +162,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
             }            
-            //await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message );  
+            await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message );  
             
             
         }
