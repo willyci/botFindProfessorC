@@ -7,6 +7,11 @@ using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
 using System.Net.Http;
 using System.Diagnostics;
+using System.Net;
+using System.Web.Configuration;
+using System.Linq;
+using Microsoft.Bot.Sample.SimpleEchoBot.Services;
+
 
 namespace Microsoft.Bot.Sample.LuisBot
 {
