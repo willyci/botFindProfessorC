@@ -61,7 +61,9 @@ namespace Microsoft.Bot.Sample.LuisBot
             //await connector.Conversations.ReplyToActivityAsync(reply);
             
             //await this.ShowLuisResult(context, result);
-            await context.PostAsync("you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.");
+            await context.SayAsync(text: "you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.", 
+                                   speak: "you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.");
+            //await context.PostAsync("you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.");
         }
         
         
