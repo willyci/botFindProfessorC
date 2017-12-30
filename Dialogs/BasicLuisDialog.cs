@@ -31,6 +31,13 @@ namespace Microsoft.Bot.Sample.LuisBot
         {
         }
         [LuisIntent("")]
+        public async Task EmptyIntent(IDialogContext context, LuisResult result)
+        {
+            //await this.ShowLuisResult(context, result);
+            await context.SayAsync(text: "Hi, welcome to profiles!", 
+                                   speak: "Welcome to Profiles!");
+        }
+        
         [LuisIntent("None")]
         public async Task NoneIntent(IDialogContext context, LuisResult result)
         {
