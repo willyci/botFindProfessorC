@@ -180,5 +180,21 @@ namespace Microsoft.Bot.Sample.LuisBot
             await context.PostAsync($"You have reached {result.Intents[0].Intent}. You said: {result.Query}");
             context.Wait(MessageReceived);
         }
+        
+        protected override async Task MessageReceived(IDialogContext context, IAwaitable<IMessageActivity> item)
+        {
+            // Check for empty query
+            var message = await item;
+            if (string.isNullOrEmpty(message.Text))
+            {
+                // Return the Help/Welcome
+                await Help(context, null);
+            }
+            else
+            {
+                await base.MessageReceived(context, item);
+            }
+        }
+        
     }
 }
