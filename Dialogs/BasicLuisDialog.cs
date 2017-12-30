@@ -181,6 +181,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             context.Wait(MessageReceived);
         }
         
+        /*
         protected override async Task MessageReceived(IDialogContext context, IAwaitable<IMessageActivity> item)
         {
             // Check for empty query
@@ -195,6 +196,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                 await base.MessageReceived(context, item);
             }
         }
+        */
         
     }
 }
