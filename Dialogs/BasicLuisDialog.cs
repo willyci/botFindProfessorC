@@ -54,7 +54,13 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("Help")]
         public async Task HelpIntent(IDialogContext context, LuisResult result)
         {
+            
+            Activity reply = activity.CreateReply("This is the text that will be displayed."); 
+            reply.Speak = "This is the text that will be spoken.";
+            reply.InputHint = InputHints.AcceptingInput;
+            await connector.Conversations.ReplyToActivityAsync(reply);
             await this.ShowLuisResult(context, result);
+
         }
         
         
