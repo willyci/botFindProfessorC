@@ -34,7 +34,9 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("None")]
         public async Task NoneIntent(IDialogContext context, LuisResult result)
         {
-            await this.ShowLuisResult(context, result);
+            //await this.ShowLuisResult(context, result);
+            await context.SayAsync(text: "Sorry, I am not programmed to respond in that area, I am not as smart as you hope to be. -- Captain Kirk", 
+                                   speak: "Sorry, I am not programmed to respond in that area, I am not as smart as you hope to be.");
         }
 
         // Go to https://luis.ai and create a new intent, then train/publish your luis app.
@@ -42,13 +44,18 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("Greeting")]
         public async Task GreetingIntent(IDialogContext context, LuisResult result)
         {
-            await this.ShowLuisResult(context, result);
+            //await this.ShowLuisResult(context, result);
+            await context.SayAsync(text: "Hello, how are you?", 
+                                   speak: "Hello, how are you?");
+            
         }
 
         [LuisIntent("Cancel")]
         public async Task CancelIntent(IDialogContext context, LuisResult result)
         {
-            await this.ShowLuisResult(context, result);
+            //await this.ShowLuisResult(context, result);
+            await context.SayAsync(text: "OK", 
+                                   speak: "OK");
         }
 
         [LuisIntent("Help")]
