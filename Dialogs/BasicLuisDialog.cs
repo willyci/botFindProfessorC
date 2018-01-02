@@ -270,8 +270,8 @@ namespace Microsoft.Bot.Sample.LuisBot
 
         private async Task TooMany(IDialogContext context, String count)
         {
-            await context.SayAsync(text: "I found more than "+ count +" people,  Please refine your search.",
-                                   speak: "I found more than "+ count +" people,  Please refine your search.");
+            await context.SayAsync(text: "I found more than "+ count.ToString +" people,  Please refine your search.",
+                                   speak: "I found more than "+ count.ToString +" people,  Please refine your search.");
         }
 
 
