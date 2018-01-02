@@ -84,7 +84,9 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("GetCount")]
         public async Task GetCountIntent(IDialogContext context, LuisResult result)
         {
-            await this.ShowLuisResult(context, result);
+            //await this.ShowLuisResult(context, result);
+            await context.SayAsync(text: "I am still working on it.",
+                                   speak: "counting and counting and counting and counting ... Sorry, the bot fall in sleep...");
         }
         
         
@@ -97,13 +99,13 @@ namespace Microsoft.Bot.Sample.LuisBot
             List<Object> list1 = new List<Object>(); // name
             List<Object> list2 = new List<Object>(); // rank
             List<Object> list3 = new List<Object>(); // department
-            
-            string message = "LUIS return";
+
+            string message = ""; // "LUIS return";
             EntityRecommendation rank;
 
             if (result.TryFindEntity(EntityFacultyRank, out rank))
             {
-                 message += ":   Faculty rank = " + rank.Entity;
+                 message += "You said :  " + rank.Entity;
             }
 
 
@@ -111,7 +113,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             if (result.TryFindEntity(EntityNameOne, out name1))
             {
-                message += ";   name = " + name1.Entity;
+                message += "  name " + name1.Entity;
             }
             
             EntityRecommendation name2;
@@ -132,10 +134,15 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             if (result.TryFindEntity(EntityDepartment, out department))
             {
-                message += ";   department = " + department.Entity;
+                message += "from department " + department.Entity +".";
             }
 
-            await context.PostAsync(message); 
+            await context.PostAsync(message);
+
+
+            await context.SayAsync(text: message,
+                                   speak: message);
+
             // load data
             message = "";            
             string m_strFilePath = "https://www.flexcode.org/luis/data.xml";
