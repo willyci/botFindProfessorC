@@ -134,7 +134,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             if (result.TryFindEntity(EntityDepartment, out department))
             {
-                message += "from department " + department.Entity +".";
+                message += " from department " + department.Entity +".";
             }
 
             await context.PostAsync(message);
@@ -150,53 +150,94 @@ namespace Microsoft.Bot.Sample.LuisBot
              IEnumerable<XElement> childList = 
                 from el in xdocument.Root.Elements() 
                 select el;
-            
-            
+
+
             // filter by name first, build new list1
-            if( name1.Entity != null && name1.Entity != String.Empty ) 
+            string message_list1 = "";
+            if ( name1.Entity != null && name1.Entity != String.Empty ) 
             {
                 foreach (XElement e in childList){
                     String str = (String)e;
                     if(str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
                         list1.Add(e);
                         //message += str + "\n";
-                        message += (String)e.Element("displayname") + " - ";
+                        message_list1 += (String)e.Element("displayname") + " - ";
                     }
                 }
             }            
-            await context.PostAsync("total by name = " + list1.Count + " , " + message );    
-            message = "";
-            
-            
+            await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
+            //message = "";
+
+
             // filter by rank, build new list2
-            if( rank.Entity != null && rank.Entity != String.Empty && list1.Count >= 1 ) 
+            string message_list2 = "";
+            if ( rank.Entity != null && rank.Entity != String.Empty && list1.Count >= 1 ) 
             {
                 foreach (XElement e in list1){
                     String str = (String)e;
                     if(str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
                         list2.Add(e);
-                        message += str + "\n";
+                        message_list2 += (String)e.Element("displayname") + " - ";
                     }
                 }
             }            
-            await context.PostAsync("total by name and rank = " + list2.Count + " , " + message );    
-            message = "";
-            
-            
+            await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
+            //message = "";
+
+
             // filter by rank, build new list2
-            if( department.Entity != null && department.Entity != String.Empty && list2.Count >= 1 ) 
+            string message_list3 = "";
+            if ( department.Entity != null && department.Entity != String.Empty && list2.Count >= 1 ) 
             {
                 foreach (XElement e in list2){
                     String str = (String)e;
                     if(str.IndexOf(department.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
                         list3.Add(e);
-                        message += str + "\n";
+                        message_list3 += (String)e.Element("facultyrank") + " " + (String)e.Element("displayname") + " from " + (String)e.Element("divisionname") + " in " + (String)e.Element("departmentname") + ". ";
                     }
                 }
             }            
-            await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message );  
-            
-            
+            await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
+
+
+
+
+            if ( list3.Count >=1 && list3.Count < 10 )
+            {
+                await context.SayAsync(text: "I found " + message_list3,
+                                   speak: "I found " + message_list3);
+            } else if (list3.Count >= 10)
+            {
+                await context.SayAsync(text: "I found more than 10 people" ,
+                                   speak: "I found more than 10 people.");
+            } else if ( list3.Count == 0 && list2.Count >= 1 && list2.Count < 10)
+            {
+                await context.SayAsync(text: "I found " + message_list2,
+                                   speak: "I found " + message_list2);
+            } else if (list3.Count == 0 && list2.Count >= 10)
+            {
+                await context.SayAsync(text: "I found more than 10 people",
+                                   speak: "I found more than 10 people.");
+            }
+            else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 1 && list1.Count < 10)
+            {
+                await context.SayAsync(text: "I found " + message_list1,
+                                   speak: "I found " + message_list1);
+            } else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 10)
+            {
+                await context.SayAsync(text: "I found more than 10 people",
+                                   speak: "I found more than 10 people.");
+            } else
+            {
+                await context.SayAsync(text: "I found a bug in my code " +  message_list1 + " " + message_list2 + " " + message_list3,
+                                   speak: "I found a bug in my code " + message_list1 + " " + message_list2 + " " + message_list3);
+            }
+
+
+
+
+
+
         }
         
         [LuisIntent("faq")]
