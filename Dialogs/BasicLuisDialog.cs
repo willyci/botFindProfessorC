@@ -268,7 +268,7 @@ namespace Microsoft.Bot.Sample.LuisBot
         }
 
 
-        private async Task TooMany(IDialogContext context, String count)
+        private async Task TooMany(IDialogContext context, int count)
         {
             await context.SayAsync(text: "I found " + count.ToString() + " people,  Please refine your search.",
                                    speak: "I found " + count.ToString() + " people,  Please refine your search.");
