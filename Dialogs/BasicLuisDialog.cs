@@ -109,6 +109,9 @@ namespace Microsoft.Bot.Sample.LuisBot
             if (result.TryFindEntity(EntityFacultyRank, out rank))
             {
                 message += "You said :  " + rank.Entity;
+            } else
+            {
+                rank.Entity = String.Empty;
             }
 
 
@@ -117,6 +120,9 @@ namespace Microsoft.Bot.Sample.LuisBot
             if (result.TryFindEntity(EntityNameOne, out name1))
             {
                 message += "  name " + name1.Entity;
+            } else
+            {
+                name1.Entity = String.Empty;
             }
 
             EntityRecommendation name2;
@@ -125,6 +131,10 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 message += ";   name2 = " + name2.Entity;
             }
+            else
+            {
+                name2.Entity = String.Empty;
+            }
 
             EntityRecommendation name3;
 
@@ -132,12 +142,20 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 message += ";   name3 = " + name3.Entity;
             }
+            else
+            {
+                name2.Entity = String.Empty;
+            }
 
             EntityRecommendation department;
 
             if (result.TryFindEntity(EntityDepartment, out department))
             {
                 message += " from department " + department.Entity + ".";
+            }
+            else
+            {
+                department.Entity = String.Empty;
             }
 
             //await context.PostAsync(message);
