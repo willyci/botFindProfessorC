@@ -109,10 +109,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             if (result.TryFindEntity(EntityFacultyRank, out rank))
             {
                 message += "You said :  " + rank.Entity;
-            } else
-            {
-                rank.Entity = "";
-            }
+            } 
 
 
             EntityRecommendation name1;
@@ -120,10 +117,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             if (result.TryFindEntity(EntityNameOne, out name1))
             {
                 message += "  name " + name1.Entity;
-            } else
-            {
-                name1.Entity = "";
-            }
+            } 
 
             EntityRecommendation name2;
 
@@ -131,10 +125,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 message += ";   name2 = " + name2.Entity;
             }
-            else
-            {
-                name2.Entity = "";
-            }
+            
 
             EntityRecommendation name3;
 
@@ -142,10 +133,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 message += ";   name3 = " + name3.Entity;
             }
-            else
-            {
-                name2.Entity = "";
-            }
+            
 
             EntityRecommendation department;
 
@@ -153,10 +141,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 message += " from department " + department.Entity + ".";
             }
-            else
-            {
-                department.Entity = "";
-            }
+            
 
             //await context.PostAsync(message);
 
