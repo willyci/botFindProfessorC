@@ -93,8 +93,11 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("FindByNameTitleDepartment")]
         public async Task FindByNameTitleDepartmentIntent(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("Searching ... ");
-            await this.ShowLuisResult(context, result);
+            //await context.PostAsync("Searching ... ");
+            //await this.ShowLuisResult(context, result);
+
+            await context.SayAsync(text: "Searching ... ",
+                                   speak: "I am on it! two seconds. ");
 
             List<Object> list1 = new List<Object>(); // name
             List<Object> list2 = new List<Object>(); // rank
@@ -137,7 +140,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                 message += " from department " + department.Entity + ".";
             }
 
-            await context.PostAsync(message);
+            //await context.PostAsync(message);
 
 
             await context.SayAsync(text: message,
@@ -219,8 +222,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else if (list3.Count >= 10)
             {
-                await context.SayAsync(text: "I found more than 10 people",
-                                   speak: "I found more than 10 people.");
+                await this.TooMany();
             }
             else if (list3.Count == 0 && list2.Count >= 1 && list2.Count < 10)
             {
@@ -229,8 +231,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else if (list3.Count == 0 && list2.Count >= 10)
             {
-                await context.SayAsync(text: "I found more than 10 people",
-                                   speak: "I found more than 10 people.");
+                await this.TooMany();
             }
             else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 1 && list1.Count < 10)
             {
@@ -239,13 +240,12 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 10)
             {
-                await context.SayAsync(text: "I found more than 10 people",
-                                   speak: "I found more than 10 people.");
+                await this.TooMany();
             }
             else
             {
-                await context.SayAsync(text: "I found a bug in my code " + message_list1 + " " + message_list2 + " " + message_list3,
-                                   speak: "I found a bug in my code " + message_list1 + " " + message_list2 + " " + message_list3);
+                await context.SayAsync(text: "You found a bug in my code " + message_list1 + " " + message_list2 + " " + message_list3,
+                                   speak: "You found a bug in my code, check the output." );
             }
 
 
@@ -266,6 +266,15 @@ namespace Microsoft.Bot.Sample.LuisBot
             await context.PostAsync($"You have reached {result.Intents[0].Intent}. You said: {result.Query}");
             context.Wait(MessageReceived);
         }
+
+
+        private async Task TooMany()
+        {
+            await context.SayAsync(text: "I found more than 10 people,  Please refine your search.",
+                                   speak: "I found more than 10 people,  Please refine your search.");
+        }
+
+
 
         /*
         protected override async Task MessageReceived(IDialogContext context, IAwaitable<IMessageActivity> item)
