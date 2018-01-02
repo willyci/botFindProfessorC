@@ -111,7 +111,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                 message += "You said :  " + rank.Entity;
             } else
             {
-                rank.Entity = String.Empty;
+                rank.Entity = "";
             }
 
 
@@ -122,7 +122,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                 message += "  name " + name1.Entity;
             } else
             {
-                name1.Entity = String.Empty;
+                name1.Entity = "";
             }
 
             EntityRecommendation name2;
@@ -133,7 +133,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else
             {
-                name2.Entity = String.Empty;
+                name2.Entity = "";
             }
 
             EntityRecommendation name3;
@@ -144,7 +144,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else
             {
-                name2.Entity = String.Empty;
+                name2.Entity = "";
             }
 
             EntityRecommendation department;
@@ -155,7 +155,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else
             {
-                department.Entity = String.Empty;
+                department.Entity = "";
             }
 
             //await context.PostAsync(message);
