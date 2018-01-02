@@ -17,16 +17,16 @@ namespace Microsoft.Bot.Sample.LuisBot
     [Serializable]
     public class BasicLuisDialog : LuisDialog<object>
     {
-        
+
         private const string EntityFacultyRank = "title";
         private const string EntityNameOne = "OnePartName";
         private const string EntityNameTwo = "TwoPartName";
         private const string EntityNameThree = "ThreePartName";
         private const string EntityDepartment = "department";
-        
+
         public BasicLuisDialog() : base(new LuisService(new LuisModelAttribute(
-            ConfigurationManager.AppSettings["LuisAppId"], 
-            ConfigurationManager.AppSettings["LuisAPIKey"], 
+            ConfigurationManager.AppSettings["LuisAppId"],
+            ConfigurationManager.AppSettings["LuisAPIKey"],
             domain: ConfigurationManager.AppSettings["LuisAPIHostName"])))
         {
         }
@@ -34,15 +34,15 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task EmptyIntent(IDialogContext context, LuisResult result)
         {
             //await this.ShowLuisResult(context, result);
-            await context.SayAsync(text: "Hi, welcome to profiles!", 
+            await context.SayAsync(text: "Hi, welcome to profiles!",
                                    speak: "Welcome to Profiles!");
         }
-        
+
         [LuisIntent("None")]
         public async Task NoneIntent(IDialogContext context, LuisResult result)
         {
             //await this.ShowLuisResult(context, result);
-            await context.SayAsync(text: "Sorry, I am not programmed to respond in that area, I am not as smart as you hope to be. -- Captain Kirk", 
+            await context.SayAsync(text: "Sorry, I am not programmed to respond in that area, I am not as smart as you hope to be. -- Captain Kirk",
                                    speak: "Sorry, I am not programmed to respond in that area, I am not as smart as you hope to be.");
         }
 
@@ -52,35 +52,35 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task GreetingIntent(IDialogContext context, LuisResult result)
         {
             //await this.ShowLuisResult(context, result);
-            await context.SayAsync(text: "Hello, how are you?", 
+            await context.SayAsync(text: "Hello, how are you?",
                                    speak: "Hello, how are you?");
-            
+
         }
 
         [LuisIntent("Cancel")]
         public async Task CancelIntent(IDialogContext context, LuisResult result)
         {
             //await this.ShowLuisResult(context, result);
-            await context.SayAsync(text: "OK", 
+            await context.SayAsync(text: "OK",
                                    speak: "OK");
         }
 
         [LuisIntent("Help")]
         public async Task HelpIntent(IDialogContext context, LuisResult result)
         {
-            
+
             //Activity reply = activity.CreateReply("This is the text that will be displayed."); 
             //reply.Speak = "This is the text that will be spoken.";
             //reply.InputHint = InputHints.AcceptingInput;
             //await connector.Conversations.ReplyToActivityAsync(reply);
-            
+
             //await this.ShowLuisResult(context, result);
-            await context.SayAsync(text: "you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.", 
+            await context.SayAsync(text: "you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.",
                                    speak: "you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.");
             //await context.PostAsync("you can say something like: find Professor John from Radiology, or lookup researcher Mary from medicine.");
         }
-        
-        
+
+
         [LuisIntent("GetCount")]
         public async Task GetCountIntent(IDialogContext context, LuisResult result)
         {
@@ -88,14 +88,14 @@ namespace Microsoft.Bot.Sample.LuisBot
             await context.SayAsync(text: "I am still working on it.",
                                    speak: "counting and counting and counting and counting ... Sorry, the bot fall in sleep...");
         }
-        
-        
+
+
         [LuisIntent("FindByNameTitleDepartment")]
         public async Task FindByNameTitleDepartmentIntent(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Searching ... ");
             await this.ShowLuisResult(context, result);
-            
+
             List<Object> list1 = new List<Object>(); // name
             List<Object> list2 = new List<Object>(); // rank
             List<Object> list3 = new List<Object>(); // department
@@ -105,7 +105,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             if (result.TryFindEntity(EntityFacultyRank, out rank))
             {
-                 message += "You said :  " + rank.Entity;
+                message += "You said :  " + rank.Entity;
             }
 
 
@@ -115,26 +115,26 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 message += "  name " + name1.Entity;
             }
-            
+
             EntityRecommendation name2;
 
             if (result.TryFindEntity(EntityNameTwo, out name2))
             {
                 message += ";   name2 = " + name2.Entity;
             }
-            
+
             EntityRecommendation name3;
 
             if (result.TryFindEntity(EntityNameThree, out name3))
             {
                 message += ";   name3 = " + name3.Entity;
             }
-            
+
             EntityRecommendation department;
 
             if (result.TryFindEntity(EntityDepartment, out department))
             {
-                message += " from department " + department.Entity +".";
+                message += " from department " + department.Entity + ".";
             }
 
             await context.PostAsync(message);
@@ -144,77 +144,90 @@ namespace Microsoft.Bot.Sample.LuisBot
                                    speak: message);
 
             // load data
-            message = "";            
+            message = "";
             string m_strFilePath = "https://www.flexcode.org/luis/data.xml";
-             XDocument xdocument = XDocument.Load(m_strFilePath);
-             IEnumerable<XElement> childList = 
-                from el in xdocument.Root.Elements() 
-                select el;
+            XDocument xdocument = XDocument.Load(m_strFilePath);
+            IEnumerable<XElement> childList =
+               from el in xdocument.Root.Elements()
+               select el;
 
 
             // filter by name first, build new list1
             string message_list1 = "";
-            if ( name1.Entity != null && name1.Entity != String.Empty ) 
+            if (name1.Entity != null && name1.Entity != String.Empty)
             {
-                foreach (XElement e in childList){
+                foreach (XElement e in childList)
+                {
                     String str = (String)e;
-                    if(str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
+                    if (str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
                         list1.Add(e);
                         //message += str + "\n";
                         message_list1 += (String)e.Element("displayname") + " - ";
                     }
                 }
-            }            
-            await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
+            }
+            //await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
             //message = "";
 
 
             // filter by rank, build new list2
             string message_list2 = "";
-            if ( rank.Entity != null && rank.Entity != String.Empty && list1.Count >= 1 ) 
+            if (rank.Entity != null && rank.Entity != String.Empty && list1.Count >= 1)
             {
-                foreach (XElement e in list1){
+                foreach (XElement e in list1)
+                {
                     String str = (String)e;
-                    if(str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
+                    if (str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
                         list2.Add(e);
                         message_list2 += (String)e.Element("displayname") + " - ";
                     }
                 }
-            }            
-            await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
+            }
+            //await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
             //message = "";
+
 
 
             // filter by rank, build new list2
             string message_list3 = "";
-            if ( department.Entity != null && department.Entity != String.Empty && list2.Count >= 1 ) 
+            if (department.Entity != null && department.Entity != String.Empty && list2.Count >= 1)
             {
-                foreach (XElement e in list2){
+                foreach (XElement e in list2)
+                {
                     String str = (String)e;
-                    if(str.IndexOf(department.Entity, StringComparison.OrdinalIgnoreCase) >= 0){
+                    if (str.IndexOf(department.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
                         list3.Add(e);
-                        message_list3 += (String)e.Element("facultyrank") + " " + (String)e.Element("displayname") + " from " + (String)e.Element("divisionname") + " in " + (String)e.Element("departmentname") + ". ";
+                        message_list3 += (String)e.Element("facultyrank") + " "
+                                        + (String)e.Element("displayname") + " from "
+                                        + (String)e.Element("divisionname") + " in "
+                                        + (String)e.Element("departmentname") + ". ";
                     }
                 }
-            }            
-            await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
+            }
+            //await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
 
 
 
 
-            if ( list3.Count >=1 && list3.Count < 10 )
+            if (list3.Count >= 1 && list3.Count < 10)
             {
                 await context.SayAsync(text: "I found " + message_list3,
                                    speak: "I found " + message_list3);
-            } else if (list3.Count >= 10)
+            }
+            else if (list3.Count >= 10)
             {
-                await context.SayAsync(text: "I found more than 10 people" ,
+                await context.SayAsync(text: "I found more than 10 people",
                                    speak: "I found more than 10 people.");
-            } else if ( list3.Count == 0 && list2.Count >= 1 && list2.Count < 10)
+            }
+            else if (list3.Count == 0 && list2.Count >= 1 && list2.Count < 10)
             {
                 await context.SayAsync(text: "I found " + message_list2,
                                    speak: "I found " + message_list2);
-            } else if (list3.Count == 0 && list2.Count >= 10)
+            }
+            else if (list3.Count == 0 && list2.Count >= 10)
             {
                 await context.SayAsync(text: "I found more than 10 people",
                                    speak: "I found more than 10 people.");
@@ -223,13 +236,15 @@ namespace Microsoft.Bot.Sample.LuisBot
             {
                 await context.SayAsync(text: "I found " + message_list1,
                                    speak: "I found " + message_list1);
-            } else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 10)
+            }
+            else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 10)
             {
                 await context.SayAsync(text: "I found more than 10 people",
                                    speak: "I found more than 10 people.");
-            } else
+            }
+            else
             {
-                await context.SayAsync(text: "I found a bug in my code " +  message_list1 + " " + message_list2 + " " + message_list3,
+                await context.SayAsync(text: "I found a bug in my code " + message_list1 + " " + message_list2 + " " + message_list3,
                                    speak: "I found a bug in my code " + message_list1 + " " + message_list2 + " " + message_list3);
             }
 
@@ -239,19 +254,19 @@ namespace Microsoft.Bot.Sample.LuisBot
 
 
         }
-        
+
         [LuisIntent("faq")]
         public async Task faqIntent(IDialogContext context, LuisResult result)
         {
             await this.ShowLuisResult(context, result);
         }
 
-        private async Task ShowLuisResult(IDialogContext context, LuisResult result) 
+        private async Task ShowLuisResult(IDialogContext context, LuisResult result)
         {
             await context.PostAsync($"You have reached {result.Intents[0].Intent}. You said: {result.Query}");
             context.Wait(MessageReceived);
         }
-        
+
         /*
         protected override async Task MessageReceived(IDialogContext context, IAwaitable<IMessageActivity> item)
         {
@@ -268,6 +283,6 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
         }
         */
-        
+
     }
 }
