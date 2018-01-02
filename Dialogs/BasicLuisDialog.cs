@@ -222,7 +222,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else if (list3.Count >= 10)
             {
-                await this.TooMany(context);
+                await this.TooMany(context, list3.Count);
             }
             else if (list3.Count == 0 && list2.Count >= 1 && list2.Count < 10)
             {
@@ -231,7 +231,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else if (list3.Count == 0 && list2.Count >= 10)
             {
-                await this.TooMany(context);
+                await this.TooMany(context, list2.Count);
             }
             else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 1 && list1.Count < 10)
             {
@@ -240,7 +240,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else if (list3.Count == 0 && list2.Count == 0 && list1.Count >= 10)
             {
-                await this.TooMany(context);
+                await this.TooMany(context, list1.Count);
             }
             else
             {
@@ -268,10 +268,10 @@ namespace Microsoft.Bot.Sample.LuisBot
         }
 
 
-        private async Task TooMany(IDialogContext context)
+        private async Task TooMany(IDialogContext context, String count)
         {
-            await context.SayAsync(text: "I found more than 10 people,  Please refine your search.",
-                                   speak: "I found more than 10 people,  Please refine your search.");
+            await context.SayAsync(text: "I found more than "+ count +" people,  Please refine your search.",
+                                   speak: "I found more than "+ count +" people,  Please refine your search.");
         }
 
 
