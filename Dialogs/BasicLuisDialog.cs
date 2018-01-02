@@ -166,7 +166,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                     {
                         list1.Add(e);
                         //message += str + "\n";
-                        message_list1 += (String)e.Element("displayname") + " - ";
+                        message_list1 += (String)e.Element("displayname") + " " + Environment.NewLine;
                     }
                 }
             }
@@ -184,7 +184,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                     if (str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         list2.Add(e);
-                        message_list2 += (String)e.Element("displayname") + " - ";
+                        message_list2 += (String)e.Element("displayname") + " " + Environment.NewLine;
                     }
                 }
             }
@@ -206,7 +206,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                         message_list3 += (String)e.Element("facultyrank") + " "
                                         + (String)e.Element("displayname") + " from "
                                         + (String)e.Element("divisionname") + " in "
-                                        + (String)e.Element("departmentname") + ". ";
+                                        + (String)e.Element("departmentname") + ". " + Environment.NewLine;
                     }
                 }
             }
