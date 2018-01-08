@@ -191,6 +191,10 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
             }
+            else
+            {
+                await context.PostAsync("rank = -" + rank.Entity + "- " );
+            }
             await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
             //message = "";
 
