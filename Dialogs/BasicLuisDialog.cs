@@ -191,7 +191,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
             }
-            //await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
+            await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
             //message = "";
 
 
@@ -213,7 +213,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
             }
-            //await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
+            await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
 
 
 
