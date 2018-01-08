@@ -173,13 +173,13 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
             }
-            //await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
+            await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
             //message = "";
 
 
             // filter by rank, build new list2
             string message_list2 = "";
-            if (rank.Entity != null && rank.Entity != String.Empty && list1.Count >= 1)
+            if (rank.Entity != null && rank.Entity != String.Empty && list1.Count >= 1  )
             {
                 foreach (XElement e in list1)
                 {
