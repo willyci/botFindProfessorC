@@ -160,7 +160,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             // filter by name first, build new list1
             string message_list1 = "";
-            if (name1.Entity != null && name1.Entity != String.Empty)
+            if (name1.Entity != null && name1.Entity != String.Empty && name1.Entity != "")
             {
                 foreach (XElement e in childList)
                 {
@@ -179,7 +179,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             // filter by rank, build new list2
             string message_list2 = "";
-            if (rank.Entity != null && rank.Entity != String.Empty && list1.Count >= 1  )
+            if (rank.Entity != null && rank.Entity != String.Empty && rank.Entity != "" && list1.Count >= 1  )
             {
                 foreach (XElement e in list1)
                 {
@@ -198,7 +198,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             // filter by rank, build new list2
             string message_list3 = "";
-            if (department.Entity != null && department.Entity != String.Empty && list2.Count >= 1)
+            if (department.Entity != null && department.Entity != String.Empty && department.Entity != "" && list2.Count >= 1)
             {
                 foreach (XElement e in list2)
                 {
