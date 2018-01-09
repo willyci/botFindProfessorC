@@ -160,7 +160,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             // filter by name first, build new list1
             string message_list1 = "";
-            if (name1.Entity != null && name1.Entity != String.Empty && name1.Entity != "")
+            if (name1 != null && name1.Entity != null && name1.Entity != String.Empty && name1.Entity != "")
             {
                 foreach (XElement e in childList)
                 {
@@ -173,15 +173,19 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
             }
+            else
+            {
+                await context.PostAsync("name not found.");
+            }
             await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
             //message = "";
 
 
             // filter by rank, build new list2
             string message_list2 = "";
-            await context.PostAsync("rank = -" + rank.Entity + "- ");
+            //await context.PostAsync("rank = -" + rank.Entity + "- ");
 
-            if (rank.Entity != null && rank.Entity != String.Empty && rank.Entity != "" && list1.Count >= 1  )
+            if (rank != null && rank.Entity != null && rank.Entity != String.Empty && rank.Entity != "" && list1.Count >= 1  )
             {
                 
                 
@@ -198,7 +202,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else
             {
-                await context.PostAsync("rank = -" + rank.Entity + "- " );
+                await context.PostAsync("rank not found." );
             }
             await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
             //message = "";
@@ -207,7 +211,7 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             // filter by rank, build new list2
             string message_list3 = "";
-            if (department.Entity != null && department.Entity != String.Empty && department.Entity != "" && list2.Count >= 1)
+            if (department != null && department.Entity != null && department.Entity != String.Empty && department.Entity != "" && list2.Count >= 1)
             {
                 foreach (XElement e in list2)
                 {
@@ -221,6 +225,10 @@ namespace Microsoft.Bot.Sample.LuisBot
                                         + (String)e.Element("departmentname") + ". " + Environment.NewLine;
                     }
                 }
+            }
+            else
+            {
+                await context.PostAsync("department not found.");
             }
             await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
 
