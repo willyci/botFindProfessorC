@@ -179,9 +179,11 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             // filter by rank, build new list2
             string message_list2 = "";
+            await context.PostAsync("rank = -" + rank.Entity + "- ");
+
             if (rank.Entity != null && rank.Entity != String.Empty && rank.Entity != "" && list1.Count >= 1  )
             {
-                await context.PostAsync("rank = -" + rank.Entity + "- ");
+                
                 
                 foreach (XElement e in list1)
                 {
