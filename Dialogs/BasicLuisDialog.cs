@@ -172,12 +172,19 @@ namespace Microsoft.Bot.Sample.LuisBot
                         message_list1 += (String)e.Element("displayname") + " " + Environment.NewLine;
                     }
                 }
+
+                await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
             }
             else
             {
                 await context.PostAsync("name not found.");
+                foreach (XElement e in childList)
+                {                    
+                        list1.Add(e);
+                }
+
             }
-            await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
+            //await context.PostAsync("total by name = " + list1.Count + " , " + message_list1);
             //message = "";
 
 
@@ -198,13 +205,15 @@ namespace Microsoft.Bot.Sample.LuisBot
                         message_list2 += (String)e.Element("displayname") + " " + Environment.NewLine;
                     }
                 }
-                
+
+                await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
             }
             else
             {
                 await context.PostAsync("rank not found." );
+                list2 = list1;
             }
-            await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
+            
             //message = "";
 
 
@@ -225,12 +234,15 @@ namespace Microsoft.Bot.Sample.LuisBot
                                         + (String)e.Element("departmentname") + ". " + Environment.NewLine;
                     }
                 }
+
+                await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
             }
             else
             {
                 await context.PostAsync("department not found.");
+                list3 = list2;
             }
-            await context.PostAsync("end, total by name and rank and department = " + list3.Count + " , " + message_list3);
+            
 
 
 
