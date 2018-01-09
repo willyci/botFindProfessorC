@@ -181,7 +181,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             string message_list2 = "";
             if (rank.Entity != null && rank.Entity != String.Empty && rank.Entity != "" && list1.Count >= 1  )
             {
-                //await context.PostAsync("rank = -" + rank.Entity + "- ");
+                await context.PostAsync("rank = -" + rank.Entity + "- ");
                 
                 foreach (XElement e in list1)
                 {
