@@ -233,7 +233,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                                         + (String)e.Element("divisionname") + " in " 
                                         + (String)e.Element("departmentname") + ", "+ Environment.NewLine +"phone number is "
                                         + (String)e.Element("phone") + ", "+  Environment.NewLine   +"email address is "
-                                        + (String)e.Element("phone") + " "
+                                        + (String)e.Element("emailaddr") + " "
                                         + Environment.NewLine;
                     }
                 }
