@@ -214,19 +214,63 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else if (name1 != null && rank != null && department == null)
             {
+                foreach (XElement e in childList)
+                {
+                    String str = (String)e;
+                    if (str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0 && str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        counter++;
+                    }
+                }
+
+                await context.SayAsync(text: "There are " + counter + " people name "+ name1.Entity +" with title " + rank.Entity + " in the database.",
+                                  speak: "There are " + counter + " people name " + name1.Entity + " with title " + rank.Entity + " in the database.");
 
             }
             else if (name1 != null && rank == null && department != null)
             {
+                foreach (XElement e in childList)
+                {
+                    String str = (String)e;
+                    if (str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0 && str.IndexOf(department.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        counter++;
+                    }
+                }
 
+                await context.SayAsync(text: "There are " + counter + " people name " + name1.Entity + " in the department " + department.Entity + ".",
+                                  speak: "There are " + counter + " people name " + name1.Entity + " in the department " + department.Entity + ".");
             }
             else if (name1 == null && rank != null && department != null)
             {
+                foreach (XElement e in childList)
+                {
+                    String str = (String)e;
+                    if (str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0 && str.IndexOf(department.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        counter++;
+                    }
+                }
 
+                await context.SayAsync(text: "There are " + counter + " people with title " + rank.Entity + " in the department " + department.Entity + ".",
+                                  speak: "There are " + counter + " people with title " + rank.Entity + " in the department " + department.Entity + ".");
             }
             else if (name1 != null && rank != null && department != null)
             {
+                foreach (XElement e in childList)
+                {
+                    String str = (String)e;
+                    if (str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0 && 
+                        str.IndexOf(department.Entity, StringComparison.OrdinalIgnoreCase) >= 0 &&
+                        str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0 
+                        )
+                    {
+                        counter++;
+                    }
+                }
 
+                await context.SayAsync(text: "There are " + counter + " people name "+ name1.Entity + " with title " + rank.Entity + " in the department " + department.Entity + ".",
+                                  speak: "There are " + counter + " people name " + name1.Entity + " with title " + rank.Entity + " in the department " + department.Entity + ".");
             }
             else
             {
