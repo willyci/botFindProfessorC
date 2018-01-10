@@ -177,7 +177,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else
             {
-                await context.PostAsync("name not found.");
+                await context.PostAsync("name not found, or LUIS didn't catch the name.");
                 foreach (XElement e in childList)
                 {                    
                         list1.Add(e);
@@ -206,11 +206,11 @@ namespace Microsoft.Bot.Sample.LuisBot
                     }
                 }
 
-                await context.PostAsync("total by name and rank = " + list2.Count + " , " + message_list2);
+                await context.PostAsync("total by name and title = " + list2.Count + " , " + message_list2);
             }
             else
             {
-                await context.PostAsync("rank not found." );
+                await context.PostAsync("title not found or LUIS didn't catch the title" );
                 list2 = list1;
             }
             
@@ -230,8 +230,11 @@ namespace Microsoft.Bot.Sample.LuisBot
                         list3.Add(e);
                         message_list3 += (String)e.Element("facultyrank") + " "
                                         + (String)e.Element("displayname") + " from "
-                                        + (String)e.Element("divisionname") + " in "
-                                        + (String)e.Element("departmentname") + ". " + Environment.NewLine;
+                                        + (String)e.Element("divisionname") + " in " 
+                                        + (String)e.Element("departmentname") + ", "+ Environment.NewLine +"phone number is "
+                                        + (String)e.Element("phone") + ", "+  Environment.NewLine   +"email address is "
+                                        + (String)e.Element("phone") + " "
+                                        + Environment.NewLine;
                     }
                 }
 
@@ -239,15 +242,19 @@ namespace Microsoft.Bot.Sample.LuisBot
             }
             else
             {
-                await context.PostAsync("department not found.");
+                await context.PostAsync("department not found, or LUIS didnt catch the department.");
                 list3 = list2;
             }
             
 
 
 
-
-            if (list3.Count >= 1 && list3.Count < 10)
+            if (list3.Count >= 4030)
+            {
+                await context.SayAsync(text: "You found a bug in my code",
+                                   speak: "You found a bug in my code, check the output.");
+            }
+            else if (list3.Count >= 1 && list3.Count < 10)
             {
                 await context.SayAsync(text: "I found " + message_list3,
                                    speak: "I found " + message_list3);
