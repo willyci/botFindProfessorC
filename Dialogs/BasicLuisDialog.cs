@@ -85,8 +85,157 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task GetCountIntent(IDialogContext context, LuisResult result)
         {
             //await this.ShowLuisResult(context, result);
-            await context.SayAsync(text: "I am still working on it.",
+            
+
+            await context.SayAsync(text: "Searching ... ",
+                                   speak: "I am on it! two seconds. ");
+
+            List<Object> list1 = new List<Object>(); // name
+            List<Object> list2 = new List<Object>(); // rank
+            List<Object> list3 = new List<Object>(); // department
+
+            string message = ""; // "LUIS return";
+            EntityRecommendation rank;
+
+            if (result.TryFindEntity(EntityFacultyRank, out rank))
+            {
+                message += "You said :  " + rank.Entity;
+            }
+
+
+            EntityRecommendation name1;
+
+            if (result.TryFindEntity(EntityNameOne, out name1))
+            {
+                message += "  name " + name1.Entity;
+            }
+
+            EntityRecommendation name2;
+
+            if (result.TryFindEntity(EntityNameTwo, out name2))
+            {
+                message += ";   name2 = " + name2.Entity;
+            }
+
+
+            EntityRecommendation name3;
+
+            if (result.TryFindEntity(EntityNameThree, out name3))
+            {
+                message += ";   name3 = " + name3.Entity;
+            }
+
+
+            EntityRecommendation department;
+
+            if (result.TryFindEntity(EntityDepartment, out department))
+            {
+                message += " from department " + department.Entity + ".";
+            }
+
+
+            //await context.PostAsync(message);
+
+
+            await context.SayAsync(text: message,
+                                   speak: message);
+
+
+
+            // load data
+            message = "";
+            string m_strFilePath = "https://www.flexcode.org/luis/data.xml";
+            XDocument xdocument = XDocument.Load(m_strFilePath);
+            IEnumerable<XElement> childList =
+               from el in xdocument.Root.Elements()
+               select el;
+
+
+
+            // filter by name first, build new list1
+            // string message_list1 = "";
+
+            int counter = 0;
+
+            if( name1 == null && rank == null && department == null )
+            {
+                foreach (XElement e in childList)
+                {
+                    counter++;
+                }
+                
+                await context.SayAsync(text: "There are " + counter + " people in the database.",
+                                   speak: "There are " + counter + " people in the database.");
+
+            }
+        
+            else if ( name1 != null && rank == null && department == null)
+            {
+                foreach (XElement e in childList)
+                {
+                    String str = (String)e;
+                    if (str.IndexOf(name1.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        counter++;
+                    }
+                }
+
+                await context.SayAsync(text: "There are " + counter + " people name "+ name1.Entity + " in the database.",
+                                   speak: "There are " + counter + " people name " + name1.Entity + " in the database.");
+
+            }
+            else if (name1 == null && rank != null && department == null)
+            {
+                foreach (XElement e in childList)
+                {
+                    String str = (String)e;
+                    if (str.IndexOf(rank.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        counter++;
+                    }
+                }
+
+                await context.SayAsync(text: "There are " + counter + " people with title " + rank.Entity + " in the database.",
+                                   speak: "There are " + counter + " people with title " + rank.Entity + " in the database.");
+            }
+            else if (name1 == null && rank == null && department != null)
+            {
+                foreach (XElement e in childList)
+                {
+                    String str = (String)e;
+                    if (str.IndexOf(department.Entity, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        counter++;
+                    }
+                }
+
+                await context.SayAsync(text: "There are " + counter + " people in the department " + department.Entity + ".",
+                                   speak: "There are " + counter + " people in the department " + department.Entity + ".");
+            }
+            else if (name1 != null && rank != null && department == null)
+            {
+
+            }
+            else if (name1 != null && rank == null && department != null)
+            {
+
+            }
+            else if (name1 == null && rank != null && department != null)
+            {
+
+            }
+            else if (name1 != null && rank != null && department != null)
+            {
+
+            }
+            else
+            {
+                await context.SayAsync(text: "I am still working on it.",
                                    speak: "counting and counting and counting and counting ... Sorry, the bot fall in sleep...");
+            }
+
+
+            
         }
 
 
