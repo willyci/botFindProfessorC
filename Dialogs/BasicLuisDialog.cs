@@ -504,10 +504,10 @@ namespace Microsoft.Bot.Sample.LuisBot
             string message = "hello";
             EntityRecommendation alphabet;
 
-            //if (result.TryFindEntity(EntityAlphabet, out alphabet))
-            //{
-            //   message = "You said :  " + alphabet.Entity;
-            //}
+            if (result.TryFindEntity(EntityAlphabet, out alphabet))
+            {
+               message += "You said :  " + alphabet.Entity;
+            }
 
             await context.SayAsync(text: message,
                                   speak: message);
