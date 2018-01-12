@@ -23,6 +23,8 @@ namespace Microsoft.Bot.Sample.LuisBot
         private const string EntityNameTwo = "TwoPartName";
         private const string EntityNameThree = "ThreePartName";
         private const string EntityDepartment = "department";
+        private const string EntityAlphabet = "alphabet";
+
 
         public BasicLuisDialog() : base(new LuisService(new LuisModelAttribute(
             ConfigurationManager.AppSettings["LuisAppId"],
@@ -491,6 +493,24 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task faqIntent(IDialogContext context, LuisResult result)
         {
             await this.ShowLuisResult(context, result);
+            await context.SayAsync(text: "I am a robot, worte in C#, made by human, my purpose is passing butter.",
+                                   speak: "I am a robot, worte in C#, made by human, my purpose is passing butter.");
+        }
+
+        [LuisIntent("FindByFirstThreeLetters")]
+        public async Task FindByFirstThreeLettersIntent(IDialogContext context, LuisResult result)
+        {
+            await this.ShowLuisResult(context, result);
+            string message = "";
+            EntityRecommendation alphabet;
+
+            if (result.TryFindEntity(EntityAlphabet, out alphabet))
+            {
+                message = "You said :  " + alphabet.Entity;
+            }
+
+            await context.SayAsync(text: message,
+                                  speak: message);
         }
 
         private async Task ShowLuisResult(IDialogContext context, LuisResult result)
