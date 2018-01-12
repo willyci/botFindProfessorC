@@ -501,22 +501,33 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task FindByFirstThreeLettersIntent(IDialogContext context, LuisResult result)
         {
             await this.ShowLuisResult(context, result);
-            string message = "hello";
+            string message = "";
             String name3Char = "";
 
-            if (result.Entities.Count > 3)
+            
+            foreach (EntityRecommendation e in result.Entities)
             {
-
-                foreach (EntityRecommendation e in result.Entities)
+                if (e.Type == "alphabet")
                 {
-                    if (e.Type == "alphabet")
-                    {
-                        name3Char += e.Entity;
-                    }
+                    name3Char += e.Entity;
                 }
+            }            
+            
+            EntityRecommendation rank;
+            if (result.TryFindEntity(EntityFacultyRank, out rank))
+            {
+                message += "You said :  " + rank.Entity;
             }
-            await context.SayAsync(text: "you said " + name3Char,
-                                  speak: name3Char);
+
+            EntityRecommendation department;
+            if (result.TryFindEntity(EntityDepartment, out department))
+            {
+                message += " from department " + department.Entity + ".";
+            }
+
+
+            await context.SayAsync(text: message + ", first 3 letters " + name3Char+'.',
+                                  speak: message + ", first 3 letters " + name3Char + '.');
 
         }
 
