@@ -501,13 +501,13 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task FindByFirstThreeLettersIntent(IDialogContext context, LuisResult result)
         {
             await this.ShowLuisResult(context, result);
-            string message = "";
+            string message = "hello";
             EntityRecommendation alphabet;
 
-            if (result.TryFindEntity(EntityAlphabet, out alphabet))
-            {
-                message = "You said :  " + alphabet.Entity;
-            }
+            //if (result.TryFindEntity(EntityAlphabet, out alphabet))
+            //{
+            //   message = "You said :  " + alphabet.Entity;
+            //}
 
             await context.SayAsync(text: message,
                                   speak: message);
