@@ -502,15 +502,22 @@ namespace Microsoft.Bot.Sample.LuisBot
         {
             await this.ShowLuisResult(context, result);
             string message = "hello";
-            EntityRecommendation alphabet;
+            String name3Char = "";
 
-            if (result.TryFindEntity(EntityAlphabet, out alphabet))
+            if (result.Entities.Count > 3)
             {
-               message += "You said :  " + alphabet.Entity;
-            }
 
-            await context.SayAsync(text: message,
-                                  speak: message);
+                foreach (EntityRecommendation e in result.Entities)
+                {
+                    if (e.Type == "alphabet")
+                    {
+                        name3Char += e.Entity;
+                    }
+                }
+            }
+            await context.SayAsync(text: "you said " + name3Char,
+                                  speak: name3Char);
+
         }
 
         private async Task ShowLuisResult(IDialogContext context, LuisResult result)
