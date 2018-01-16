@@ -503,37 +503,68 @@ namespace Microsoft.Bot.Sample.LuisBot
             await this.ShowLuisResult(context, result);
             string message = "";
             String name3Char = "";
+            //string[] searchArray = { };
+            var searchArray = new List<string> { };
 
-            
             foreach (EntityRecommendation e in result.Entities)
             {
                 if (e.Type == "alphabet")
                 {
                     name3Char += e.Entity;
                 }
-            }            
-            
+            }
+            if (name3Char.Length > 0)
+            {
+                searchArray.Add(name3Char);
+            }
+
+
             EntityRecommendation rank;
             if (result.TryFindEntity(EntityFacultyRank, out rank))
             {
                 message += "You said :  " + rank.Entity;
+                searchArray.Add(rank.Entity);
             }
 
             EntityRecommendation department;
             if (result.TryFindEntity(EntityDepartment, out department))
             {
                 message += " from department " + department.Entity + ".";
+                searchArray.Add(department.Entity);
             }
 
 
             await context.SayAsync(text: message + ", first 3 letters " + name3Char+'.',
                                   speak: message + ", first 3 letters " + name3Char + '.');
-                                  
-                                  
+
+
             //https://stackoverflow.com/questions/2912476/using-c-sharp-to-check-if-string-contains-a-string-in-string-array/2912483
             //string stringToCheck = "text1text2text3";
             //string[] stringArray = { "text1", "someothertext", etc... };
-            //if(stringArray.All(stringToCheck.Contains)) {  }
+            //if(searchArray.All(str.Contains)) {  }
+
+
+
+            List<Object> list1 = new List<Object>();
+            string m_strFilePath = "https://www.flexcode.org/luis/data.xml";
+            XDocument xdocument = XDocument.Load(m_strFilePath);
+            IEnumerable<XElement> childList =
+               from el in xdocument.Root.Elements()
+               select el;
+
+
+           
+            foreach (XElement e in childList)
+            {
+                String str = (String)e;
+                    
+                if (searchArray.All(str.Contains)) {
+                    list1.Add(e);
+                }
+            }
+
+                await context.PostAsync("total found = " + list1.Count + " , ");
+           
 
         }
 
