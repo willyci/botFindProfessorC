@@ -544,7 +544,7 @@ namespace Microsoft.Bot.Sample.LuisBot
             //if(searchArray.All(str.Contains)) {  }
 
 
-            message = "";
+            message = string.Join(" - ", searchArray); 
             List<Object> list1 = new List<Object>();
             string m_strFilePath = "https://www.flexcode.org/luis/data.xml";
             XDocument xdocument = XDocument.Load(m_strFilePath);
