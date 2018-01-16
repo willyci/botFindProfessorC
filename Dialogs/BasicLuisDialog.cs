@@ -528,6 +528,12 @@ namespace Microsoft.Bot.Sample.LuisBot
 
             await context.SayAsync(text: message + ", first 3 letters " + name3Char+'.',
                                   speak: message + ", first 3 letters " + name3Char + '.');
+                                  
+                                  
+            //https://stackoverflow.com/questions/2912476/using-c-sharp-to-check-if-string-contains-a-string-in-string-array/2912483
+            //string stringToCheck = "text1text2text3";
+            //string[] stringArray = { "text1", "someothertext", etc... };
+            //if(stringArray.All(stringToCheck.Contains)) {  }
 
         }
 
