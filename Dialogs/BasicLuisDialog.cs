@@ -544,15 +544,11 @@ namespace Microsoft.Bot.Sample.LuisBot
             //if(searchArray.All(str.Contains)) {  }
 
 
-
+            message = "";
             List<Object> list1 = new List<Object>();
             string m_strFilePath = "https://www.flexcode.org/luis/data.xml";
             XDocument xdocument = XDocument.Load(m_strFilePath);
-            IEnumerable<XElement> childList =
-               from el in xdocument.Root.Elements()
-               select el;
-
-
+            IEnumerable<XElement> childList = from el in xdocument.Root.Elements() select el;
            
             foreach (XElement e in childList)
             {
@@ -560,10 +556,11 @@ namespace Microsoft.Bot.Sample.LuisBot
                     
                 if (searchArray.All(str.Contains)) {
                     list1.Add(e);
+                    message += e + ", ";
                 }
             }
 
-                await context.PostAsync("total found = " + list1.Count + " , ");
+            await context.PostAsync("total found = " + list1.Count + " , "+ message);
            
 
         }
