@@ -597,5 +597,47 @@ namespace Microsoft.Bot.Sample.LuisBot
         }
         */
 
+        //-----------------------------------------------------------------------------------------------
+        // helpdesk demo
+
+        [LuisIntent("IssueWifi")]
+        public async Task IssueWifiIntent(IDialogContext context, LuisResult result)
+        {
+            await context.SayAsync(text: "Are you having Wifi issue, try connect to UMMS with your NT account. goto this page for more help https://umassmed.edu/it/how-do-i/get-started/wireless/",
+                                   speak: "Are you having Wifi issue, try connect to UMMS with your NT account. goto this page for more help https://umassmed.edu/it/how-do-i/get-started/wireless/");
+        }
+
+        [LuisIntent("IssueVPN")]
+        public async Task IssueVPNIntent(IDialogContext context, LuisResult result)
+        {
+            await context.SayAsync(text: "goto https://remote.umassmed.edu/ to login your computer, for more help Chick out this page https://umassmed.edu/it/how-do-i/get-connected/working-remotely/",
+                                   speak: "goto https://remote.umassmed.edu/ to login your computer, for more help Chick out this page https://umassmed.edu/it/how-do-i/get-connected/working-remotely/");
+        }
+
+        [LuisIntent("IssuePassword")]
+        public async Task IssuePasswordIntent(IDialogContext context, LuisResult result)
+        {
+            await context.SayAsync(text: "password issue go here https://umassmed.edu/it/how-do-i/passwords/",
+                                   speak: "I can help you with user name and password issue. go here https://umassmed.edu/it/how-do-i/passwords/ ");
+        }
+
+
+        [LuisIntent("IssueMapDrive")]
+        public async Task IssueMapDriveIntent(IDialogContext context, LuisResult result)
+        {
+            await context.SayAsync(text: "goto here for more infomation about R drive https://umassmed.edu/it/how-do-i/get-connected/r-drives/",
+                                   speak: "goto here for more infomation about R drive https://umassmed.edu/it/how-do-i/get-connected/r-drives/");
+        }
+
+
+        [LuisIntent("IssueDuo")]
+        public async Task IssueDuoIntent(IDialogContext context, LuisResult result)
+        {
+            await context.SayAsync(text: "install the app or answer your phone and press 5. https://www.umassmed.edu/it/security/multi-factor-authentication/",
+                                   speak: "install the app or answer your office phone and press 5.");
+        }
+        
+        //----------------------------------------------
+
     }
 }
