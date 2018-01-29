@@ -604,21 +604,21 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task IssueWifiIntent(IDialogContext context, LuisResult result)
         {
             await context.SayAsync(text: "Are you having Wifi issue, try connect to UMMS with your NT account. goto this page for more help https://umassmed.edu/it/how-do-i/get-started/wireless/",
-                                   speak: "Are you having Wifi issue, try connect to UMMS with your NT account. goto this page for more help https://umassmed.edu/it/how-do-i/get-started/wireless/");
+                                   speak: "Are you having Wifi issue, try connect to UMMS with your NT account.");
         }
 
         [LuisIntent("IssueVPN")]
         public async Task IssueVPNIntent(IDialogContext context, LuisResult result)
         {
-            await context.SayAsync(text: "goto https://remote.umassmed.edu/ to login your computer, for more help Chick out this page https://umassmed.edu/it/how-do-i/get-connected/working-remotely/",
-                                   speak: "goto https://remote.umassmed.edu/ to login your computer, for more help Chick out this page https://umassmed.edu/it/how-do-i/get-connected/working-remotely/");
+            await context.SayAsync(text: "goto https://remote.umassmed.edu/ to login your computer, for more help Check out this page https://umassmed.edu/it/how-do-i/get-connected/working-remotely/",
+                                   speak: "goto here to remote login.");
         }
 
         [LuisIntent("IssuePassword")]
         public async Task IssuePasswordIntent(IDialogContext context, LuisResult result)
         {
             await context.SayAsync(text: "password issue go here https://umassmed.edu/it/how-do-i/passwords/",
-                                   speak: "I can help you with user name and password issue. go here https://umassmed.edu/it/how-do-i/passwords/ ");
+                                   speak: "I can help you with user name and password issue. no need for any human contact.");
         }
 
 
@@ -626,7 +626,7 @@ namespace Microsoft.Bot.Sample.LuisBot
         public async Task IssueMapDriveIntent(IDialogContext context, LuisResult result)
         {
             await context.SayAsync(text: "goto here for more infomation about R drive https://umassmed.edu/it/how-do-i/get-connected/r-drives/",
-                                   speak: "goto here for more infomation about R drive https://umassmed.edu/it/how-do-i/get-connected/r-drives/");
+                                   speak: "goto here for more infomation about R drive.");
         }
 
 
