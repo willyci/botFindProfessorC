@@ -640,14 +640,14 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("AboutTalk")]
         public async Task AboutTalkIntent(IDialogContext context, LuisResult result)
         {
-            await context.SayAsync(text: "Me! It is about me! Me! Me! Me! How smart I am, how fast I am. I am the center of all servers after all.",
-                                   speak: "Me! It is about me! Me! Me! Me! How smart I am, how fast I am. I am the center of all servers after all.");
+            await context.SayAsync(text: "Me! The talk is about me! How smart I am, how fast I am. I am the center of all servers after all.",
+                                   speak: "Me! The talk is about me! How smart I am, how fast I am. I am the center of all servers after all.");
         }
         
         [LuisIntent("AboutSpeaker")]
         public async Task AboutSpeakerIntent(IDialogContext context, LuisResult result)
         {
-            await context.SayAsync(text: "install the app or answer your phone and press 5. https://www.umassmed.edu/it/security/multi-factor-authentication/",
+            await context.SayAsync(text: "The pretty one is Veronika Kolesnikova, while she is not coding with Microsoft technologies, she dances, travel, and practicing aerial yoga. Follow her on twitter @breakpointv16. The other one is just Willy, he wrote part of my subroutine, he also like to working on Hololens, AR, VR, boring stuff. ",
                                    speak: "The pretty one is Veronika Kolesnikova, while she is not coding with Microsoft technologies, she dances, travel, and practicing aerial yoga. Follow her on twitter @breakpointv16. The other one is just Willy, he wrote part of my subroutine, he also like to working on Hololens, AR, VR, boring stuff. ");
         }
         
