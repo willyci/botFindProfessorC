@@ -647,8 +647,8 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("AboutSpeaker")]
         public async Task AboutSpeakerIntent(IDialogContext context, LuisResult result)
         {
-            await context.SayAsync(text: "The pretty one is Veronika Kolesnikova, when she is not coding with Microsoft technologies, she dances, travel, and practicing aerial yoga. Follow her on twitter @breakpointv16. The other one is just Willy Ci, he wrote part of my skills, he also like to working on Hololens, AR, VR, boring stuff. Follow him on twitter @willy_ci.",
-                                   speak: "The pretty one is Veronika Kolesnikova, when she is not coding with Microsoft technologies, she dances, travel, and practicing aerial yoga. Follow her on twitter @breakpointv16. The other one is just Willy Ci, he wrote part of my skills, he also like to working on Hololens, AR, VR, boring stuff.  Follow him on twitter @willy_ci.");
+            await context.SayAsync(text: "The pretty one is Veronika Kolesnikova, when she is not coding with Microsoft technologies, she dances, travels, and practices aerial yoga. Follow her on twitter @breakpointv16. The other one is just Willy Ci, he wrote part of my skills, he also like to working on Hololens, AR, VR, boring stuff. Follow him on twitter @willy_ci.",
+                                   speak: "The pretty one is Veronika Kolesnikova, when she is not coding with Microsoft technologies, she dances, travels, and practices aerial yoga. Follow her on twitter @breakpointv16. The other one is just Willy Ci, he wrote part of my skills, he also like to working on Hololens, AR, VR, boring stuff.  Follow him on twitter @willy_ci.");
         }
         
         
