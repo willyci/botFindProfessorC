@@ -610,7 +610,7 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("IssueVPN")]
         public async Task IssueVPNIntent(IDialogContext context, LuisResult result)
         {
-            await context.SayAsync(text: "goto https://remote.umassmed.edu/ to login your computer, for more help Check out this page https://umassmed.edu/it/how-do-i/get-connected/working-remotely/",
+            await context.SayAsync(text: "goto https://remote.umassmed.edu/ to login your computer, for more help Check out this page https://umassmed.service-now.com/kb_view.do?sysparm_article=KB0010511",
                                    speak: "goto here to remote login.");
         }
 
